@@ -658,7 +658,6 @@
           "type": "edgeselect",
           "selectedEdgeData": {
             "0": [
-              6,
               16
             ]
           }
@@ -719,8 +718,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.685546875,
-      "y": 0.7799999999999999,
+      "x": 0.658203125,
+      "y": 0.7599999999999999,
       "uniqueID": "id-3051",
       "name": "selected.EdgesByShape",
       "ioValues": [
