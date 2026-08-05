@@ -7,8 +7,7 @@
   "ioValues": [
     {
       "name": "Leg_Length",
-      "ioValue": 11,
-      "currentEquation": "11"
+      "ioValue": 11
     },
     {
       "name": "Thickness",
@@ -354,8 +353,7 @@
         },
         {
           "name": "zDist",
-          "ioValue": 0.2,
-          "currentEquation": "0.2"
+          "ioValue": 0.2
         }
       ]
     },
@@ -393,7 +391,8 @@
         },
         {
           "name": "radius",
-          "ioValue": 0.1
+          "ioValue": 0.5,
+          "currentEquation": "0.5"
         }
       ],
       "topLevel": false,
@@ -422,7 +421,7 @@
             },
             {
               "name": "radius",
-              "ioValue": 0.1
+              "ioValue": 0.5
             }
           ],
           "interpreterVersion": 1,
