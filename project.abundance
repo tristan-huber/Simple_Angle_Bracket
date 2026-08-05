@@ -345,7 +345,7 @@
         },
         {
           "name": "xDist",
-          "ioValue": 2.5
+          "ioValue": 2.6
         },
         {
           "name": "yDist",
@@ -353,7 +353,8 @@
         },
         {
           "name": "zDist",
-          "ioValue": 0.01
+          "ioValue": 0,
+          "currentEquation": "0"
         }
       ]
     },
@@ -362,14 +363,14 @@
       "x": 0.37630208333333337,
       "y": 0.9226190476190476,
       "uniqueID": "id-2547",
-      "name": "x / 2",
+      "name": "x / 2 + 0.1",
       "ioValues": [
         {
           "name": "x",
           "ioValue": 5
         }
       ],
-      "currentEquation": "x / 2"
+      "currentEquation": "x / 2 + 0.1"
     },
     {
       "atomType": "Input",
@@ -379,28 +380,9 @@
       "name": "Fillet"
     },
     {
-      "atomType": "Code",
-      "x": 0.7200520833333334,
-      "y": 0.32857142857142857,
-      "uniqueID": "id-2664",
-      "ioValues": [
-        {
-          "name": "input",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "boundingShape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(input: Assembly, boundingShape: Assembly) {\n  const bounds: replicad.Shape3D[] = []\n  boundingShape.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      bounds.push(leaf.geometry)\n    }\n    return leaf; \n  })\n\n  if (bounds.length == 0) {\n    return input;\n  }\n\n  console.log(`Using ${bounds.length} bounding shapes`)\n\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    for (const bound of bounds) {\n      const finder = new replicad.EdgeFinder().inShape(bound)\n      const foundEdges = finder.find(leaf.geometry)\n      const allEdges = leaf.geometry.edges;\n      const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n      console.log(`found edges: ${foundEdges} indexes: ${indexes}`)\n      selectedIndexes.push(...indexes)\n    }\n\n    if (leaf.selection == undefined) {\n      leaf.selection = {edges: []}\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n  console.log('blahblah')\n  console.log(res)\n  return res;\n}",
-      "compiledCode": "\"use strict\";\nfunction run(input, boundingShape) {\n    const bounds = [];\n    boundingShape.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            bounds.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (bounds.length == 0) {\n        return input;\n    }\n    console.log(`Using ${bounds.length} bounding shapes`);\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        for (const bound of bounds) {\n            const finder = new replicad.EdgeFinder().inShape(bound);\n            const foundEdges = finder.find(leaf.geometry);\n            const allEdges = leaf.geometry.edges;\n            const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n            console.log(`found edges: ${foundEdges} indexes: ${indexes}`);\n            selectedIndexes.push(...indexes);\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n    console.log('blahblah');\n    console.log(res);\n    return res;\n}\n"
-    },
-    {
       "atomType": "GitHubMolecule",
-      "x": 0.8242187499999999,
-      "y": 0.2542857142857143,
+      "x": 0.7890625,
+      "y": 0.5885714285714286,
       "uniqueID": "id-2693",
       "name": "selected.Fillet",
       "ioValues": [
@@ -410,8 +392,7 @@
         },
         {
           "name": "radius",
-          "ioValue": 0.1,
-          "currentEquation": "0.1"
+          "ioValue": 0.1
         }
       ],
       "topLevel": false,
@@ -456,10 +437,10 @@
           "type": "edgeselect",
           "selectedEdgeData": {
             "0": [
-              1,
+              0,
               3,
               4,
-              9,
+              8,
               12,
               13,
               16
@@ -522,22 +503,13 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.67578125,
-      "y": 0.6011904761904762,
-      "uniqueID": "id-2437",
-      "name": "Fillet_in_Bounds",
+      "x": 0.796875,
+      "y": 0.8514285714285714,
+      "uniqueID": "id-2970",
+      "name": "ExtractEdges",
       "ioValues": [
         {
-          "name": "Shape",
-          "ioValue": "__GEOMETRY_INPUT__"
-        },
-        {
-          "name": "Radius",
-          "ioValue": 2.5,
-          "currentEquation": "Fillet"
-        },
-        {
-          "name": "Selection",
+          "name": "Input",
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ],
@@ -547,7 +519,114 @@
           "atomType": "Output",
           "x": 0.98,
           "y": 0.5,
-          "uniqueID": "id-2418",
+          "uniqueID": "id-2967",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-2968",
+          "type": "edgeselect",
+          "selectedEdgeData": {
+            "0": [
+              0,
+              3,
+              4,
+              8,
+              12,
+              13,
+              16
+            ]
+          }
+        },
+        {
+          "atomType": "Code",
+          "x": 0.4309895833333333,
+          "y": 0.4342857142857143,
+          "uniqueID": "id-2969",
+          "ioValues": [
+            {
+              "name": "input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(input: Assembly) {\n  const res = input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n      const edges = leaf.geometry.edges;\n      const edgeIndexes = leaf.selection.edges\n      if (edgeIndexes.length == 1) {\n        leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]])\n        return leaf;\n      } else {\n        const res = edgeIndexes.map((index) => {\n          return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]])})\n        })\n        return new Assembly({\n          geometry: res\n        })\n      }\n    }\n    return null;\n  })\n  return res;\n}",
+          "compiledCode": "\"use strict\";\nfunction run(input) {\n    const res = input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        if (leaf.selection?.edges && leaf.selection.edges.length > 0) {\n            const edges = leaf.geometry.edges;\n            const edgeIndexes = leaf.selection.edges;\n            if (edgeIndexes.length == 1) {\n                leaf.geometry = replicad.assembleWire([edges[edgeIndexes[0]]]);\n                return leaf;\n            }\n            else {\n                const res = edgeIndexes.map((index) => {\n                    return new Assembly({ ...leaf, geometry: replicad.assembleWire([edges[index]]) });\n                });\n                return new Assembly({\n                    geometry: res\n                });\n            }\n        }\n        return null;\n    });\n    return res;\n}\n"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "input",
+          "ap1ID": "id-2968",
+          "ap2ID": "id-2969"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-2969",
+          "ap2ID": "id-2967"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-08-05T10:27:40.321Z",
+        "privateRepo": false,
+        "repoName": "ExtractEdges",
+        "dateCreated": "2026-07-24T20:38:56Z",
+        "likes": 0,
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-34874",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/ExtractEdges",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739824",
+        "ranking": 0.3,
+        "searchField": "extractedges tristan-huber select edges from an assembly by clicking on them. returns a new assembly of just those edges as wires. selection is saved as index of each edge in it's leaf. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Select edges from an assembly by clicking on them. Returns a new assembly of just those edges as wires. Selection is saved as index of each edge in it's leaf.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/ExtractEdges/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1785947752395
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.7122395833333334,
+      "y": 0.38857142857142857,
+      "uniqueID": "id-3013",
+      "name": "selected.Fillet",
+      "ioValues": [
+        {
+          "name": "shape",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "radius",
+          "ioValue": 2.5,
+          "currentEquation": "Fillet"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-3014",
           "ioValues": [
             {
               "name": "number or geometry",
@@ -557,395 +636,199 @@
         },
         {
           "atomType": "Code",
-          "x": 0.5456349206349206,
-          "y": 0.5738161559888579,
-          "uniqueID": "id-2419",
+          "x": 0.404296875,
+          "y": 0.6542857142857142,
+          "uniqueID": "id-3015",
           "ioValues": [
             {
-              "name": "shape",
+              "name": "toFillet",
               "ioValue": "__GEOMETRY_INPUT__"
             },
             {
               "name": "radius",
               "ioValue": 2.5
-            },
-            {
-              "name": "region",
-              "ioValue": "__GEOMETRY_INPUT__"
             }
           ],
-          "interpreterVersion": 0,
-          "code": "const Inputs = [\n  { inputName: \"shape\", type: \"geometry\", defaultValue: null },\n  { inputName: \"radius\", type: \"number\", defaultValue: 2 },\n  { inputName: \"region\", type: \"geometry\", defaultValue: null },\n];\n\nlet assembly = library[shape];\n\nlet edgeFilter = null;\nif (region !== null) {\n  let bounds = await GetBounds(region);\n  const tol = 1e-6;\n  edgeFilter = (e) => e.when(({ element }) => {\n    const bb = element.boundingBox.bounds;\n    return (\n      bb[0][0] >= bounds.min[0] - tol &&\n      bb[0][1] >= bounds.min[1] - tol &&\n      bb[0][2] >= bounds.min[2] - tol &&\n      bb[1][0] <= bounds.max[0] + tol &&\n      bb[1][1] <= bounds.max[1] + tol &&\n      bb[1][2] <= bounds.max[2] + tol\n    );\n  });\n}\n\nreturn await AssemblyMap(assembly, async (leaf) => {\n  let solid = leaf.geometry[0];\n  let filleted = edgeFilter ? solid.fillet(radius, edgeFilter) : solid.fillet(radius);\n  return { ...leaf, geometry: [filleted] };\n});"
-        },
-        {
-          "atomType": "Rectangle",
-          "x": 0.19246031746031744,
-          "y": 0.14763231197771587,
-          "uniqueID": "id-2420",
-          "ioValues": [
-            {
-              "name": "x length",
-              "ioValue": 100
-            },
-            {
-              "name": "y length",
-              "ioValue": 100
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.36574074074074076,
-          "y": 0.2785515320334262,
-          "uniqueID": "id-2421",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 100
-            }
-          ]
-        },
-        {
-          "atomType": "Rectangle",
-          "x": 0.26785714285714285,
-          "y": 0.818941504178273,
-          "uniqueID": "id-2422",
-          "ioValues": [
-            {
-              "name": "x length",
-              "ioValue": 120
-            },
-            {
-              "name": "y length",
-              "ioValue": 120
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.37050264550264544,
-          "y": 0.8022284122562675,
-          "uniqueID": "id-2423",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 10
-            }
-          ]
-        },
-        {
-          "atomType": "Move",
-          "x": 0.45833333333333337,
-          "y": 0.8272980501392758,
-          "uniqueID": "id-2424",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "xDist",
-              "ioValue": 50
-            },
-            {
-              "name": "yDist",
-              "ioValue": 0
-            },
-            {
-              "name": "zDist",
-              "ioValue": -2
-            }
-          ]
-        },
-        {
-          "atomType": "Circle",
-          "x": 0.15674603174603174,
-          "y": 0.43732590529247906,
-          "uniqueID": "id-2425",
-          "ioValues": [
-            {
-              "name": "diameter",
-              "ioValue": 100
-            }
-          ]
-        },
-        {
-          "atomType": "Extrude",
-          "x": 0.4966931216931217,
-          "y": 0.3203342618384401,
-          "uniqueID": "id-2426",
-          "ioValues": [
-            {
-              "name": "geometry",
-              "ioValue": "__GEOMETRY_INPUT__"
-            },
-            {
-              "name": "height",
-              "ioValue": 100
-            }
-          ]
+          "interpreterVersion": 1,
+          "code": "function run(toFillet: Assembly, radius: number) {\n  return toFillet.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing || !replicad.isShape3D(leaf.geometry)) {\n      return leaf;\n    }\n    if (leaf.selection?.part) {\n      leaf.geometry = leaf.geometry.fillet(radius)\n      return leaf;\n    }\n    // else apply only to filtered faces and edges\n    let edgesToFillet: replicad.Edge[] = []\n    if (leaf.selection?.faces) {\n      leaf.selection.faces.forEach((faceIndex) => {\n        edgesToFillet.push(...leaf.geometry.faces[faceIndex].edges)\n      });\n    }\n    console.log(edgesToFillet)\n    console.log(\"intermediate\")\n    console.log(leaf.selection)\n    if (leaf.selection?.edges) {\n      edgesToFillet.push(...leaf.selection.edges.map((index) => leaf.geometry.edges[index]))\n    }\n    if (edgesToFillet.length == 0) {\n      return leaf;\n    }\n    edgesToFillet = edgesToFillet.filter((e) => e != null)\n    if (edgesToFillet.length == 0) {\n      return leaf.geometry\n    }\n    console.log(edgesToFillet)\n    leaf.geometry = leaf.geometry.fillet(radius, (e) => { return e.inList(edgesToFillet.map((e) => e.clone())) })\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(toFillet, radius) {\n    return toFillet.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing || !replicad.isShape3D(leaf.geometry)) {\n            return leaf;\n        }\n        if (leaf.selection?.part) {\n            leaf.geometry = leaf.geometry.fillet(radius);\n            return leaf;\n        }\n        // else apply only to filtered faces and edges\n        let edgesToFillet = [];\n        if (leaf.selection?.faces) {\n            leaf.selection.faces.forEach((faceIndex) => {\n                edgesToFillet.push(...leaf.geometry.faces[faceIndex].edges);\n            });\n        }\n        console.log(edgesToFillet);\n        console.log(\"intermediate\");\n        console.log(leaf.selection);\n        if (leaf.selection?.edges) {\n            edgesToFillet.push(...leaf.selection.edges.map((index) => leaf.geometry.edges[index]));\n        }\n        if (edgesToFillet.length == 0) {\n            return leaf;\n        }\n        edgesToFillet = edgesToFillet.filter((e) => e != null);\n        if (edgesToFillet.length == 0) {\n            return leaf.geometry;\n        }\n        console.log(edgesToFillet);\n        leaf.geometry = leaf.geometry.fillet(radius, (e) => { return e.inList(edgesToFillet.map((e) => e.clone())); });\n        return leaf;\n    });\n}\n"
         },
         {
           "atomType": "Input",
           "x": 0.025384615384615384,
           "y": 0.15384615384615385,
-          "uniqueID": "id-2434",
-          "name": "Shape",
+          "uniqueID": "id-3016",
+          "name": "shape",
+          "type": "edgeselect",
+          "selectedEdgeData": {
+            "0": [
+              16
+            ]
+          }
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.24615384615384617,
+          "uniqueID": "id-3017",
+          "name": "radius"
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-3015",
+          "ap2ID": "id-3014"
+        },
+        {
+          "ap2Name": "toFillet",
+          "ap1ID": "id-3016",
+          "ap2ID": "id-3015"
+        },
+        {
+          "ap2Name": "radius",
+          "ap1ID": "id-3017",
+          "ap2ID": "id-3015"
+        }
+      ],
+      "parentRepo": {
+        "lastFoundGit": "2026-08-05T10:27:40.321Z",
+        "privateRepo": false,
+        "repoName": "selected.Fillet",
+        "dateCreated": "2026-07-21T21:29:20Z",
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/README.md?sanitize=true",
+        "yyyy": 2026,
+        "topMoleculeID": "id-22879",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/selected.Fillet",
+        "topics": [
+          "abundance-tool"
+        ],
+        "pullRequests": [],
+        "parentRepo": null,
+        "forks": 0,
+        "dateModified": "739818",
+        "ranking": 0,
+        "searchField": "selected.fillet tristan-huber fillet the only the selected edges of an assembly. you can also input face or sub-assembly selections, edges will be filleted if they meet any of the selection criteria, eg on a selected subassembly, on a selected face. default fillets all edges. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "Fillet the only the selected edges of an assembly. You can also input face or sub-assembly selections, edges will be filleted if they meet any of the selection criteria, eg on a selected subassembly, on a selected face. Default fillets all edges.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/selected.Fillet/master/project.svg?sanitize=true",
+        "isLocal": false
+      },
+      "unitsKey": "Unitless",
+      "fileTypeVersion": 1,
+      "lastReloadedFromGithubAt": 1785946325285
+    },
+    {
+      "atomType": "GitHubMolecule",
+      "x": 0.6861979166666666,
+      "y": 0.84,
+      "uniqueID": "id-3034",
+      "name": "selected.EdgesByShape",
+      "ioValues": [
+        {
+          "name": "edgesOf",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "intersecting",
+          "ioValue": "__GEOMETRY_INPUT__"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-3030",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Code",
+          "x": 0.34505208333333337,
+          "y": 0.44857142857142857,
+          "uniqueID": "id-3031",
+          "ioValues": [
+            {
+              "name": "input",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "boundingShape",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "function run(input: Assembly, boundingShape: Assembly) {\n  const bounds: replicad.Shape3D[] = []\n  boundingShape.onLeafs((leaf) => {\n    if (leaf.is3D()) {\n      bounds.push(leaf.geometry)\n    }\n    return leaf;\n  })\n\n  if (bounds.length == 0) {\n    return input;\n  }\n\n  console.log(`Using ${bounds.length} bounding shapes`)\n\n  return input.onLeafs((leaf) => {\n    if (leaf.geometry instanceof replicad.Drawing) {\n      throw new Error(\"Drawings have no Edges. Input must be 3d\")\n    }\n    // identify new indexes to mark as selected\n    const selectedIndexes = []\n    for (const bound of bounds) {\n      const finder = new replicad.EdgeFinder().inShape(bound)\n      const foundEdges = finder.find(leaf.geometry)\n      const allEdges = leaf.geometry.edges;\n      const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n      console.log(`found edges: ${foundEdges} indexes: ${indexes}`)\n      selectedIndexes.push(...indexes)\n    }\n\n    if (leaf.selection == undefined) {\n      leaf.selection = { edges: [] }\n    }\n    const before = leaf.selection.edges as number[];\n    leaf.selection.edges = [... new Set([...before, ...selectedIndexes])]\n    console.log(`updated selection list ${before} to ${leaf.selection.edges}`)\n    return leaf;\n  })\n}",
+          "compiledCode": "\"use strict\";\nfunction run(input, boundingShape) {\n    const bounds = [];\n    boundingShape.onLeafs((leaf) => {\n        if (leaf.is3D()) {\n            bounds.push(leaf.geometry);\n        }\n        return leaf;\n    });\n    if (bounds.length == 0) {\n        return input;\n    }\n    console.log(`Using ${bounds.length} bounding shapes`);\n    return input.onLeafs((leaf) => {\n        if (leaf.geometry instanceof replicad.Drawing) {\n            throw new Error(\"Drawings have no Edges. Input must be 3d\");\n        }\n        // identify new indexes to mark as selected\n        const selectedIndexes = [];\n        for (const bound of bounds) {\n            const finder = new replicad.EdgeFinder().inShape(bound);\n            const foundEdges = finder.find(leaf.geometry);\n            const allEdges = leaf.geometry.edges;\n            const indexes = foundEdges.map((f) => allEdges.findIndex((edge) => edge.isSame(f)));\n            console.log(`found edges: ${foundEdges} indexes: ${indexes}`);\n            selectedIndexes.push(...indexes);\n        }\n        if (leaf.selection == undefined) {\n            leaf.selection = { edges: [] };\n        }\n        const before = leaf.selection.edges;\n        leaf.selection.edges = [...new Set([...before, ...selectedIndexes])];\n        console.log(`updated selection list ${before} to ${leaf.selection.edges}`);\n        return leaf;\n    });\n}\n"
+        },
+        {
+          "atomType": "Input",
+          "x": 0.025384615384615384,
+          "y": 0.15384615384615385,
+          "uniqueID": "id-3032",
+          "name": "edgesOf",
           "type": "geometry"
         },
         {
           "atomType": "Input",
           "x": 0.025384615384615384,
           "y": 0.24615384615384617,
-          "uniqueID": "id-2435",
-          "name": "Radius"
-        },
-        {
-          "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.3384615384615385,
-          "uniqueID": "id-2436",
-          "name": "Selection",
+          "uniqueID": "id-3033",
+          "name": "intersecting",
           "type": "geometry"
-        },
-        {
-          "atomType": "GitHubMolecule",
-          "x": 0.42857142857142855,
-          "y": 0.22284122562674097,
-          "uniqueID": "id-2427",
-          "name": "Concentric_Circles",
-          "ioValues": [
-            {
-              "name": "OD",
-              "ioValue": 100
-            },
-            {
-              "name": "ID",
-              "ioValue": 50
-            }
-          ],
-          "topLevel": false,
-          "allAtoms": [
-            {
-              "atomType": "Output",
-              "x": 0.98,
-              "y": 0.5,
-              "uniqueID": "id-2428",
-              "ioValues": [
-                {
-                  "name": "number or geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.15384615384615385,
-              "uniqueID": "id-2429",
-              "name": "OD",
-              "type": "number"
-            },
-            {
-              "atomType": "Input",
-              "x": 0.025384615384615384,
-              "y": 0.24615384615384617,
-              "uniqueID": "id-2430",
-              "name": "ID",
-              "type": "number"
-            },
-            {
-              "atomType": "Circle",
-              "x": 0.460559796437659,
-              "y": 0.42567567567567566,
-              "uniqueID": "id-2431",
-              "ioValues": [
-                {
-                  "name": "diameter",
-                  "ioValue": 100
-                }
-              ]
-            },
-            {
-              "atomType": "Circle",
-              "x": 0.44529262086514,
-              "y": 0.7263513513513513,
-              "uniqueID": "id-2432",
-              "ioValues": [
-                {
-                  "name": "diameter",
-                  "ioValue": 50
-                }
-              ]
-            },
-            {
-              "atomType": "Difference",
-              "x": 0.6615776081424937,
-              "y": 0.5506756756756757,
-              "uniqueID": "id-2433",
-              "ioValues": [
-                {
-                  "name": "retain",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "remove",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            }
-          ],
-          "allConnectors": [
-            {
-              "ap2Name": "diameter",
-              "ap1ID": "id-2429",
-              "ap2ID": "id-2431"
-            },
-            {
-              "ap2Name": "diameter",
-              "ap1ID": "id-2430",
-              "ap2ID": "id-2432"
-            },
-            {
-              "ap2Name": "retain",
-              "ap1ID": "id-2431",
-              "ap2ID": "id-2433"
-            },
-            {
-              "ap2Name": "remove",
-              "ap1ID": "id-2432",
-              "ap2ID": "id-2433"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-2433",
-              "ap2ID": "id-2428"
-            }
-          ],
-          "parentRepo": {
-            "lastFoundGit": "2026-04-28T18:23:39.166Z",
-            "privateRepo": false,
-            "repoName": "Concentric_Circles",
-            "dateCreated": "2025-11-08T04:08:14Z",
-            "likes": 0,
-            "readMe": "https://raw.githubusercontent.com/BarbourSmith/Concentric_Circles/master/README.md?sanitize=true",
-            "yyyy": 2025,
-            "topMoleculeID": "id-1170",
-            "githubMoleculesUsed": [],
-            "html_url": "https://github.com/BarbourSmith/Concentric_Circles",
-            "topics": [],
-            "parentRepo": null,
-            "forks": 0,
-            "dateModified": "739563",
-            "ranking": 18.9,
-            "searchField": "concentric_circles barboursmith creates two concentric circles. the result is 2d ",
-            "owner": "BarbourSmith",
-            "description": "Creates two concentric circles. The result is 2D",
-            "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Concentric_Circles/master/project.abundance?sanitize=true",
-            "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Concentric_Circles/master/project.svg?sanitize=true",
-            "isLocal": false
-          },
-          "unitsKey": "Unitless",
-          "fileTypeVersion": 1,
-          "lastReloadedFromGithubAt": 1777409097289
         }
       ],
       "allConnectors": [
         {
           "ap2Name": "number or geometry",
-          "ap1ID": "id-2419",
-          "ap2ID": "id-2418"
+          "ap1ID": "id-3031",
+          "ap2ID": "id-3030"
         },
         {
-          "ap2Name": "geometry",
-          "ap1ID": "id-2420",
-          "ap2ID": "id-2421"
+          "ap2Name": "input",
+          "ap1ID": "id-3032",
+          "ap2ID": "id-3031"
         },
         {
-          "ap2Name": "geometry",
-          "ap1ID": "id-2422",
-          "ap2ID": "id-2423"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-2423",
-          "ap2ID": "id-2424"
-        },
-        {
-          "ap2Name": "shape",
-          "ap1ID": "id-2434",
-          "ap2ID": "id-2419"
-        },
-        {
-          "ap2Name": "radius",
-          "ap1ID": "id-2435",
-          "ap2ID": "id-2419"
-        },
-        {
-          "ap2Name": "region",
-          "ap1ID": "id-2436",
-          "ap2ID": "id-2419"
-        },
-        {
-          "ap2Name": "geometry",
-          "ap1ID": "id-2427",
-          "ap2ID": "id-2426"
+          "ap2Name": "boundingShape",
+          "ap1ID": "id-3033",
+          "ap2ID": "id-3031"
         }
       ],
       "parentRepo": {
-        "lastFoundGit": "2026-05-05T02:23:39.099Z",
         "privateRepo": false,
-        "repoName": "Fillet_in_Bounds",
-        "dateCreated": "2026-04-28T20:40:52Z",
-        "likes": 0,
-        "readMe": "https://raw.githubusercontent.com/BarbourSmith/Fillet_in_Bounds/master/README.md?sanitize=true",
+        "repoName": "selected.EdgesByShape",
+        "dateCreated": "2026-08-05T16:31:12Z",
+        "readMe": "https://raw.githubusercontent.com/tristan-huber/selected.EdgesByShape/master/README.md?sanitize=true",
         "yyyy": 2026,
-        "topMoleculeID": "id-524",
-        "githubMoleculesUsed": [
-          {
-            "owner": "BarbourSmith",
-            "repoName": "Concentric_Circles"
-          }
+        "topMoleculeID": "id-2824",
+        "githubMoleculesUsed": [],
+        "html_url": "https://github.com/tristan-huber/selected.EdgesByShape",
+        "topics": [
+          "abundance-tool"
         ],
-        "html_url": "https://github.com/BarbourSmith/Fillet_in_Bounds",
-        "topics": [],
         "parentRepo": null,
         "forks": 0,
-        "dateModified": "739734",
-        "ranking": 1.2,
-        "searchField": "fillet_in_bounds barboursmith takes an input shape and a selection box and fillets all of the edges that fall within the bounding box ",
-        "owner": "BarbourSmith",
-        "description": "Takes an input shape and a selection box and fillets all of the edges that fall within the bounding box",
-        "contentURL": "https://raw.githubusercontent.com/BarbourSmith/Fillet_in_Bounds/master/project.abundance?sanitize=true",
-        "svgURL": "https://raw.githubusercontent.com/BarbourSmith/Fillet_in_Bounds/master/project.svg?sanitize=true",
+        "dateModified": "739833",
+        "ranking": 0,
+        "searchField": "selected.edgesbyshape tristan-huber creates a selection of edges based on intersection with a secondary shape / assembly. any edge which touches the selector geometry is included, even if the egde is not fully enclosed. abundance-tool",
+        "owner": "tristan-huber",
+        "description": "creates a selection of edges based on intersection with a secondary shape / assembly. Any edge which touches the selector geometry is included, even if the egde is not fully enclosed.",
+        "contentURL": "https://raw.githubusercontent.com/tristan-huber/selected.EdgesByShape/master/project.abundance?sanitize=true",
+        "svgURL": "https://raw.githubusercontent.com/tristan-huber/selected.EdgesByShape/master/project.svg?sanitize=true",
         "isLocal": false
       },
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
-      "lastReloadedFromGithubAt": 1777951259659
-    },
-    {
-      "atomType": "Code",
-      "x": 0.8190104166666667,
-      "y": 0.6028571428571429,
-      "uniqueID": "id-2820",
-      "ioValues": [
-        {
-          "name": "input",
-          "ioValue": "__GEOMETRY_INPUT__"
-        }
-      ],
-      "interpreterVersion": 1,
-      "code": "function run(input: Assembly) {\n  console.log(input)\n  return input\n}",
-      "compiledCode": "\"use strict\";\nfunction run(input) {\n    console.log(input);\n    return input;\n}\n"
+      "lastReloadedFromGithubAt": 1785947999581
     }
   ],
   "allConnectors": [
@@ -1005,14 +888,14 @@
       "ap2ID": "id-2515"
     },
     {
-      "ap2Name": "Shape",
+      "ap2Name": "shape",
       "ap1ID": "id-2515",
-      "ap2ID": "id-2437"
+      "ap2ID": "id-3013"
     },
     {
-      "ap2Name": "input",
+      "ap2Name": "edgesOf",
       "ap1ID": "id-2515",
-      "ap2ID": "id-2664"
+      "ap2ID": "id-3034"
     },
     {
       "ap2Name": "geometry",
@@ -1040,14 +923,9 @@
       "ap2ID": "id-2541"
     },
     {
-      "ap2Name": "Selection",
+      "ap2Name": "intersecting",
       "ap1ID": "id-2541",
-      "ap2ID": "id-2437"
-    },
-    {
-      "ap2Name": "boundingShape",
-      "ap1ID": "id-2541",
-      "ap2ID": "id-2664"
+      "ap2ID": "id-3034"
     },
     {
       "ap2Name": "xDist",
@@ -1055,19 +933,19 @@
       "ap2ID": "id-2541"
     },
     {
-      "ap2Name": "input",
-      "ap1ID": "id-2664",
-      "ap2ID": "id-2820"
+      "ap2Name": "number or geometry",
+      "ap1ID": "id-3013",
+      "ap2ID": "id-2389"
+    },
+    {
+      "ap2Name": "Input",
+      "ap1ID": "id-3034",
+      "ap2ID": "id-2970"
     },
     {
       "ap2Name": "shape",
-      "ap1ID": "id-2664",
+      "ap1ID": "id-3034",
       "ap2ID": "id-2693"
-    },
-    {
-      "ap2Name": "number or geometry",
-      "ap1ID": "id-2437",
-      "ap2ID": "id-2389"
     }
   ],
   "unitsKey": "Unitless",
