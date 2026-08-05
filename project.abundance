@@ -391,8 +391,7 @@
         },
         {
           "name": "radius",
-          "ioValue": 0.5,
-          "currentEquation": "0.5"
+          "ioValue": 0.5
         }
       ],
       "topLevel": false,
