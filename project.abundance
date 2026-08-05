@@ -7,7 +7,8 @@
   "ioValues": [
     {
       "name": "Leg_Length",
-      "ioValue": 11
+      "ioValue": 20,
+      "currentEquation": "20"
     },
     {
       "name": "Thickness",
@@ -15,7 +16,7 @@
     },
     {
       "name": "Leg_Length_2",
-      "ioValue": 11,
+      "ioValue": 20,
       "currentEquation": "Leg_Length"
     },
     {
@@ -24,7 +25,7 @@
     },
     {
       "name": "Fillet",
-      "ioValue": 2.75,
+      "ioValue": 5,
       "currentEquation": "min(Leg_Length, Leg_Length_2) / 4"
     }
   ],
@@ -71,7 +72,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 11
+          "ioValue": 20
         },
         {
           "name": "y length",
@@ -98,7 +99,7 @@
         },
         {
           "name": "xDist",
-          "ioValue": 5.5,
+          "ioValue": 10,
           "currentEquation": "Leg_Length / 2"
         },
         {
@@ -136,7 +137,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 11
+          "ioValue": 20
         },
         {
           "name": "y length",
@@ -206,7 +207,7 @@
         },
         {
           "name": "zDist",
-          "ioValue": 5.5,
+          "ioValue": 10,
           "currentEquation": "Leg_Length_2 / 2"
         }
       ]
@@ -220,7 +221,7 @@
         {
           "name": "Shape 1",
           "ioValue": {
-            "geometry": "extrude-move-rectangle-11-4-5.5-0-0-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2",
+            "geometry": "extrude-move-rectangle-20-4-10-0-0-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2",
             "dimension": "3D",
             "plane": {
               "origin": [
@@ -247,7 +248,7 @@
         {
           "name": "Shape 2",
           "ioValue": {
-            "geometry": "move-rotate-extrude-rectangle-11-4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2-0--90-0-2-0-5.5",
+            "geometry": "move-rotate-extrude-rectangle-20-4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2-0--90-0-2-0-10",
             "dimension": "3D",
             "plane": {
               "origin": [
@@ -282,7 +283,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 5.5,
+          "ioValue": 10,
           "currentEquation": "Math.min(Leg_Length_1, Leg_Lenght_2)"
         },
         {
@@ -301,12 +302,12 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 11,
+          "ioValue": 20,
           "currentEquation": "Leg_Length"
         },
         {
           "name": "y",
-          "ioValue": 11,
+          "ioValue": 20,
           "currentEquation": "Leg_Length_2"
         },
         {
@@ -329,7 +330,7 @@
         },
         {
           "name": "height",
-          "ioValue": 5.5
+          "ioValue": 10
         }
       ]
     },
@@ -345,7 +346,7 @@
         },
         {
           "name": "xDist",
-          "ioValue": 2.85
+          "ioValue": 5.1
         },
         {
           "name": "yDist",
@@ -366,7 +367,7 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 5.5
+          "ioValue": 10
         }
       ],
       "currentEquation": "x / 2 + 0.1"
@@ -611,7 +612,7 @@
         },
         {
           "name": "radius",
-          "ioValue": 2.75,
+          "ioValue": 5,
           "currentEquation": "Fillet"
         }
       ],
@@ -641,7 +642,7 @@
             },
             {
               "name": "radius",
-              "ioValue": 2.75
+              "ioValue": 5
             }
           ],
           "interpreterVersion": 1,
@@ -657,6 +658,7 @@
           "type": "edgeselect",
           "selectedEdgeData": {
             "0": [
+              6,
               16
             ]
           }
@@ -717,8 +719,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.6861979166666666,
-      "y": 0.84,
+      "x": 0.685546875,
+      "y": 0.7799999999999999,
       "uniqueID": "id-3051",
       "name": "selected.EdgesByShape",
       "ioValues": [
