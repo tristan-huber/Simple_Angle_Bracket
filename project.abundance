@@ -295,8 +295,8 @@
     },
     {
       "atomType": "Equation",
-      "x": 0.2975260416666667,
-      "y": 0.8154761904761905,
+      "x": 0.19140625000000003,
+      "y": 0.8628571428571429,
       "uniqueID": "id-2532",
       "name": "max(min(x, y) / 2, z)",
       "ioValues": [
@@ -350,8 +350,7 @@
         },
         {
           "name": "yDist",
-          "ioValue": 0,
-          "currentEquation": "0"
+          "ioValue": 0
         },
         {
           "name": "zDist",
@@ -528,7 +527,11 @@
           "y": 0.15384615384615385,
           "uniqueID": "id-2968",
           "type": "edgeselect",
-          "selectedEdgeData": {}
+          "selectedEdgeData": {
+            "0": [
+              16
+            ]
+          }
         },
         {
           "atomType": "Code",
@@ -919,7 +922,7 @@
     },
     {
       "ap2Name": "number or geometry",
-      "ap1ID": "id-3013",
+      "ap1ID": "id-2693",
       "ap2ID": "id-2389"
     },
     {
