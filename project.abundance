@@ -7,8 +7,7 @@
   "ioValues": [
     {
       "name": "Leg_Length",
-      "ioValue": 10,
-      "currentEquation": "10"
+      "ioValue": 10
     },
     {
       "name": "Thickness",
