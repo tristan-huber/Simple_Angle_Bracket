@@ -7,8 +7,7 @@
   "ioValues": [
     {
       "name": "Leg_Length",
-      "ioValue": 20,
-      "currentEquation": "20"
+      "ioValue": 20
     },
     {
       "name": "Thickness",
@@ -214,8 +213,8 @@
     },
     {
       "atomType": "Fusion",
-      "x": 0.5963541666666667,
-      "y": 0.4880952380952381,
+      "x": 0.6041666666666666,
+      "y": 0.46,
       "uniqueID": "id-2515",
       "ioValues": [
         {
@@ -288,8 +287,8 @@
         },
         {
           "name": "y length",
-          "ioValue": 5,
-          "currentEquation": "Width + 1"
+          "ioValue": 3.9,
+          "currentEquation": "Width - 0.1"
         }
       ]
     },
@@ -350,7 +349,8 @@
         },
         {
           "name": "yDist",
-          "ioValue": 0
+          "ioValue": 0.1,
+          "currentEquation": "0.1"
         },
         {
           "name": "zDist",
@@ -435,15 +435,7 @@
           "uniqueID": "id-2691",
           "name": "shape",
           "type": "edgeselect",
-          "selectedEdgeData": {
-            "0": [
-              3,
-              4,
-              12,
-              13,
-              16
-            ]
-          }
+          "selectedEdgeData": {}
         },
         {
           "atomType": "Input",
@@ -531,15 +523,7 @@
           "y": 0.15384615384615385,
           "uniqueID": "id-2968",
           "type": "edgeselect",
-          "selectedEdgeData": {
-            "0": [
-              3,
-              4,
-              12,
-              13,
-              16
-            ]
-          }
+          "selectedEdgeData": {}
         },
         {
           "atomType": "Code",
@@ -718,8 +702,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.658203125,
-      "y": 0.7599999999999999,
+      "x": 0.6555989583333333,
+      "y": 0.7257142857142858,
       "uniqueID": "id-3051",
       "name": "selected.EdgesByShape",
       "ioValues": [
@@ -932,11 +916,6 @@
       "ap2Name": "number or geometry",
       "ap1ID": "id-3013",
       "ap2ID": "id-2389"
-    },
-    {
-      "ap2Name": "Input",
-      "ap1ID": "id-3051",
-      "ap2ID": "id-2970"
     },
     {
       "ap2Name": "shape",
