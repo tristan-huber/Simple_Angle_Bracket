@@ -7,7 +7,8 @@
   "ioValues": [
     {
       "name": "Leg_Length",
-      "ioValue": 20
+      "ioValue": 10,
+      "currentEquation": "10"
     },
     {
       "name": "Thickness",
@@ -15,7 +16,7 @@
     },
     {
       "name": "Leg_Length_2",
-      "ioValue": 20,
+      "ioValue": 10,
       "currentEquation": "Leg_Length"
     },
     {
@@ -24,7 +25,7 @@
     },
     {
       "name": "Fillet",
-      "ioValue": 5,
+      "ioValue": 2.5,
       "currentEquation": "min(Leg_Length, Leg_Length_2) / 4"
     }
   ],
@@ -71,7 +72,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 20
+          "ioValue": 10
         },
         {
           "name": "y length",
@@ -98,7 +99,7 @@
         },
         {
           "name": "xDist",
-          "ioValue": 10,
+          "ioValue": 5,
           "currentEquation": "Leg_Length / 2"
         },
         {
@@ -136,7 +137,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 20
+          "ioValue": 10
         },
         {
           "name": "y length",
@@ -206,7 +207,7 @@
         },
         {
           "name": "zDist",
-          "ioValue": 10,
+          "ioValue": 5,
           "currentEquation": "Leg_Length_2 / 2"
         }
       ]
@@ -220,7 +221,7 @@
         {
           "name": "Shape 1",
           "ioValue": {
-            "geometry": "extrude-move-rectangle-20-4-10-0-0-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2",
+            "geometry": "extrude-move-rectangle-10-4-5-0-0-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2",
             "dimension": "3D",
             "plane": {
               "origin": [
@@ -247,7 +248,7 @@
         {
           "name": "Shape 2",
           "ioValue": {
-            "geometry": "move-rotate-extrude-rectangle-20-4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2-0--90-0-2-0-10",
+            "geometry": "move-rotate-extrude-rectangle-10-4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2-0--90-0-2-0-5",
             "dimension": "3D",
             "plane": {
               "origin": [
@@ -282,7 +283,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 10,
+          "ioValue": 5,
           "currentEquation": "Math.min(Leg_Length_1, Leg_Lenght_2)"
         },
         {
@@ -301,12 +302,12 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 20,
+          "ioValue": 10,
           "currentEquation": "Leg_Length"
         },
         {
           "name": "y",
-          "ioValue": 20,
+          "ioValue": 10,
           "currentEquation": "Leg_Length_2"
         },
         {
@@ -329,7 +330,7 @@
         },
         {
           "name": "height",
-          "ioValue": 10
+          "ioValue": 5
         }
       ]
     },
@@ -345,12 +346,12 @@
         },
         {
           "name": "xDist",
-          "ioValue": 5.1
+          "ioValue": 2.6
         },
         {
           "name": "yDist",
-          "ioValue": 0.1,
-          "currentEquation": "0.1"
+          "ioValue": 0,
+          "currentEquation": "0"
         },
         {
           "name": "zDist",
@@ -367,7 +368,7 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 10
+          "ioValue": 5
         }
       ],
       "currentEquation": "x / 2 + 0.1"
@@ -435,7 +436,11 @@
           "uniqueID": "id-2691",
           "name": "shape",
           "type": "edgeselect",
-          "selectedEdgeData": {}
+          "selectedEdgeData": {
+            "0": [
+              16
+            ]
+          }
         },
         {
           "atomType": "Input",
@@ -596,7 +601,7 @@
         },
         {
           "name": "radius",
-          "ioValue": 5,
+          "ioValue": 2.5,
           "currentEquation": "Fillet"
         }
       ],
@@ -626,7 +631,7 @@
             },
             {
               "name": "radius",
-              "ioValue": 5
+              "ioValue": 2.5
             }
           ],
           "interpreterVersion": 1,
@@ -921,6 +926,11 @@
       "ap2Name": "shape",
       "ap1ID": "id-3051",
       "ap2ID": "id-2693"
+    },
+    {
+      "ap2Name": "Input",
+      "ap1ID": "id-3051",
+      "ap2ID": "id-2970"
     }
   ],
   "unitsKey": "Unitless",
