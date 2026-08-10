@@ -7,7 +7,7 @@
   "ioValues": [
     {
       "name": "Leg_Length",
-      "ioValue": 10
+      "ioValue": 15
     },
     {
       "name": "Thickness",
@@ -15,7 +15,7 @@
     },
     {
       "name": "Leg_Length_2",
-      "ioValue": 10,
+      "ioValue": 15,
       "currentEquation": "Leg_Length"
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "name": "Fillet",
-      "ioValue": 2.5,
+      "ioValue": 3.75,
       "currentEquation": "min(Leg_Length, Leg_Length_2) / 4"
     }
   ],
@@ -44,22 +44,22 @@
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.15384615384615385,
+      "x": 0.0231,
+      "y": 0.14,
       "uniqueID": "id-2391",
       "name": "Leg_Length"
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.24615384615384617,
+      "x": 0.0231,
+      "y": 0.22400000000000003,
       "uniqueID": "id-2394",
       "name": "Thickness"
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.3384615384615385,
+      "x": 0.0231,
+      "y": 0.30800000000000005,
       "uniqueID": "id-2397",
       "name": "Leg_Length_2"
     },
@@ -71,7 +71,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 10
+          "ioValue": 15
         },
         {
           "name": "y length",
@@ -81,8 +81,8 @@
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.4307692307692308,
+      "x": 0.0231,
+      "y": 0.39200000000000007,
       "uniqueID": "id-2404",
       "name": "Width"
     },
@@ -98,7 +98,7 @@
         },
         {
           "name": "xDist",
-          "ioValue": 5,
+          "ioValue": 7.5,
           "currentEquation": "Leg_Length / 2"
         },
         {
@@ -136,7 +136,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 10
+          "ioValue": 15
         },
         {
           "name": "y length",
@@ -206,7 +206,7 @@
         },
         {
           "name": "zDist",
-          "ioValue": 5,
+          "ioValue": 7.5,
           "currentEquation": "Leg_Length_2 / 2"
         }
       ]
@@ -220,7 +220,7 @@
         {
           "name": "Shape 1",
           "ioValue": {
-            "geometry": "extrude-move-rectangle-10-4-5-0-0-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2",
+            "geometry": "extrude-move-rectangle-15-4-7.5-0-0-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2",
             "dimension": "3D",
             "plane": {
               "origin": [
@@ -247,7 +247,7 @@
         {
           "name": "Shape 2",
           "ioValue": {
-            "geometry": "move-rotate-extrude-rectangle-10-4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2-0--90-0-2-0-5",
+            "geometry": "move-rotate-extrude-rectangle-15-4-{\"origin\":[0,0,0],\"xDir\":[1,0,0],\"normal\":[0,0,1]}-2-0--90-0-2-0-7.5",
             "dimension": "3D",
             "plane": {
               "origin": [
@@ -282,7 +282,7 @@
       "ioValues": [
         {
           "name": "x length",
-          "ioValue": 5,
+          "ioValue": 7.5,
           "currentEquation": "Math.min(Leg_Length_1, Leg_Lenght_2)"
         },
         {
@@ -301,12 +301,12 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 10,
+          "ioValue": 15,
           "currentEquation": "Leg_Length"
         },
         {
           "name": "y",
-          "ioValue": 10,
+          "ioValue": 15,
           "currentEquation": "Leg_Length_2"
         },
         {
@@ -329,7 +329,7 @@
         },
         {
           "name": "height",
-          "ioValue": 5
+          "ioValue": 7.5
         }
       ]
     },
@@ -345,7 +345,7 @@
         },
         {
           "name": "xDist",
-          "ioValue": 2.6
+          "ioValue": 3.85
         },
         {
           "name": "yDist",
@@ -366,15 +366,15 @@
       "ioValues": [
         {
           "name": "x",
-          "ioValue": 5
+          "ioValue": 7.5
         }
       ],
       "currentEquation": "x / 2 + 0.1"
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.5230769230769231,
+      "x": 0.0231,
+      "y": 0.4760000000000001,
       "uniqueID": "id-2551",
       "name": "Fillet"
     },
@@ -391,7 +391,8 @@
         },
         {
           "name": "radius",
-          "ioValue": 0.5
+          "ioValue": 3.75,
+          "currentEquation": "Fillet"
         }
       ],
       "topLevel": false,
@@ -420,7 +421,7 @@
             },
             {
               "name": "radius",
-              "ioValue": 0.5
+              "ioValue": 3.75
             }
           ],
           "interpreterVersion": 1,
@@ -429,8 +430,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-2691",
           "name": "shape",
           "type": "edgeselect",
@@ -442,8 +443,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
+          "x": 0.0231,
+          "y": 0.22400000000000003,
           "uniqueID": "id-2692",
           "name": "radius"
         }
@@ -522,8 +523,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-2968",
           "type": "edgeselect",
           "selectedEdgeData": {
@@ -592,8 +593,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.6888020833333333,
-      "y": 0.3628571428571429,
+      "x": 0.676300578034682,
+      "y": 0.19642857142857142,
       "uniqueID": "id-3013",
       "name": "selected.Fillet",
       "ioValues": [
@@ -603,8 +604,8 @@
         },
         {
           "name": "radius",
-          "ioValue": 2.5,
-          "currentEquation": "Fillet"
+          "ioValue": 0.5,
+          "currentEquation": "0.5"
         }
       ],
       "topLevel": false,
@@ -633,7 +634,7 @@
             },
             {
               "name": "radius",
-              "ioValue": 2.5
+              "ioValue": 0.5
             }
           ],
           "interpreterVersion": 1,
@@ -642,21 +643,23 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-3016",
           "name": "shape",
           "type": "edgeselect",
           "selectedEdgeData": {
             "0": [
-              16
+              16,
+              4,
+              12
             ]
           }
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
+          "x": 0.0231,
+          "y": 0.22400000000000003,
           "uniqueID": "id-3017",
           "name": "radius"
         }
@@ -709,8 +712,8 @@
     },
     {
       "atomType": "GitHubMolecule",
-      "x": 0.6555989583333333,
-      "y": 0.7257142857142858,
+      "x": 0.6738232865400495,
+      "y": 0.7470238095238095,
       "uniqueID": "id-3051",
       "name": "selected.EdgesByShape",
       "ioValues": [
@@ -758,16 +761,16 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-3049",
           "name": "edgesOf",
           "type": "geometry"
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
+          "x": 0.0231,
+          "y": 0.22400000000000003,
           "uniqueID": "id-3050",
           "name": "intersecting",
           "type": "geometry"
