@@ -529,7 +529,8 @@
           "type": "edgeselect",
           "selectedEdgeData": {
             "0": [
-              16
+              16,
+              12
             ]
           }
         },
@@ -604,8 +605,7 @@
         },
         {
           "name": "radius",
-          "ioValue": 0.5,
-          "currentEquation": "0.5"
+          "ioValue": 0.5
         }
       ],
       "topLevel": false,
@@ -651,7 +651,6 @@
           "selectedEdgeData": {
             "0": [
               16,
-              4,
               12
             ]
           }
