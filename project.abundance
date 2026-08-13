@@ -44,22 +44,22 @@
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.15384615384615385,
+      "x": 0.0231,
+      "y": 0.14,
       "uniqueID": "id-2391",
       "name": "Leg_Length"
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.24615384615384617,
+      "x": 0.0231,
+      "y": 0.22400000000000003,
       "uniqueID": "id-2394",
       "name": "Thickness"
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.3384615384615385,
+      "x": 0.0231,
+      "y": 0.30800000000000005,
       "uniqueID": "id-2397",
       "name": "Leg_Length_2"
     },
@@ -81,8 +81,8 @@
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.4307692307692308,
+      "x": 0.0231,
+      "y": 0.39200000000000007,
       "uniqueID": "id-2404",
       "name": "Width"
     },
@@ -373,8 +373,8 @@
     },
     {
       "atomType": "Input",
-      "x": 0.025384615384615384,
-      "y": 0.5230769230769231,
+      "x": 0.0231,
+      "y": 0.4760000000000001,
       "uniqueID": "id-2551",
       "name": "Fillet"
     },
@@ -430,8 +430,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-2691",
           "name": "shape",
           "type": "edgeselect",
@@ -443,8 +443,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
+          "x": 0.0231,
+          "y": 0.22400000000000003,
           "uniqueID": "id-2692",
           "name": "radius"
         }
@@ -523,8 +523,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-2968",
           "type": "edgeselect",
           "selectedEdgeData": {
@@ -642,8 +642,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-3016",
           "name": "shape",
           "type": "edgeselect",
@@ -656,8 +656,8 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
+          "x": 0.0231,
+          "y": 0.22400000000000003,
           "uniqueID": "id-3017",
           "name": "radius"
         }
@@ -759,16 +759,16 @@
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.15384615384615385,
+          "x": 0.0231,
+          "y": 0.14,
           "uniqueID": "id-3049",
           "name": "edgesOf",
           "type": "geometry"
         },
         {
           "atomType": "Input",
-          "x": 0.025384615384615384,
-          "y": 0.24615384615384617,
+          "x": 0.0231,
+          "y": 0.22400000000000003,
           "uniqueID": "id-3050",
           "name": "intersecting",
           "type": "geometry"
@@ -817,6 +817,36 @@
       "unitsKey": "Unitless",
       "fileTypeVersion": 1,
       "lastReloadedFromGithubAt": 1785948065145
+    },
+    {
+      "atomType": "Export",
+      "x": 0.8515625,
+      "y": 0.31547619047619047,
+      "uniqueID": "id-3154",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "File Type",
+          "ioValue": "STL",
+          "currentEquation": "STL"
+        },
+        {
+          "name": "Resolution (dpi)",
+          "ioValue": 96
+        },
+        {
+          "name": "Part Name",
+          "ioValue": "Simple_Angle_Bracket",
+          "currentEquation": "Simple_Angle_Bracket"
+        }
+      ],
+      "type": "STL",
+      "resolution": 96,
+      "importIndex": 0,
+      "partName": "Simple_Angle_Bracket"
     }
   ],
   "allConnectors": [
@@ -924,6 +954,11 @@
       "ap2Name": "number or geometry",
       "ap1ID": "id-2693",
       "ap2ID": "id-2389"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-2693",
+      "ap2ID": "id-3154"
     },
     {
       "ap2Name": "shape",
