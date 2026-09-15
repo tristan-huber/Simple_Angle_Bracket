@@ -2,7 +2,7 @@
 
 # Simple_Angle_Bracket
 
-![](/project.svg)
+![](/project.png)
 
 ## Inputs
 
